@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput } from 'react-native'
+import { View, Text, Image, TextInput, ScrollView } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { useNavigation} from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -8,6 +8,7 @@ import {
   SearchIcon,
   AdjustmentsIcon,
 } from 'react-native-heroicons/outline'
+import Categories from '../components/Categories'
 
 
 export default function HomeScreen() {
@@ -46,6 +47,15 @@ export default function HomeScreen() {
           </View>
           <AdjustmentsIcon color="#00ccbb" />
         </View>
+        {/* Body */}
+        <ScrollView
+          className='bg-gray-100'  
+          contentContainerStyle={{
+            paddingBottom: 100,
+          }}>
+            {/* Categories */}
+            <Categories />
+        </ScrollView>
     </SafeAreaView>
   )
 }
