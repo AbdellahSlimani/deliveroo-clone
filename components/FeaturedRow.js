@@ -1,6 +1,7 @@
 import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import { ArrowRightIcon } from 'react-native-heroicons/outline'
+import RestaurantCard from './RestaurantCard'
 
 const FeaturedRow = (props) => {
   return (
@@ -20,6 +21,79 @@ const FeaturedRow = (props) => {
         className='pt-4'
       >
         {/* RestaurantCards */}
+        <RestaurantCard 
+          id={124}
+          imgUrl='https://links.papareact.com/gn7'
+          title='Yo! sushi'
+          rating={4.5}
+          genre="japanese"
+          address="123 Main 51"
+          short-description="This is a short description"
+          dishes={[]}
+          long={20}
+          lat={0}
+        />
+        <RestaurantCard 
+          id={124}
+          imgUrl='https://links.papareact.com/gn7'
+          title='Yo! sushi'
+          rating={4.5}
+          genre="japanese"
+          address="123 Main 51"
+          short-description="This is a short description"
+          dishes={[]}
+          long={20}
+          lat={0}
+        />
+        <RestaurantCard 
+          id={124}
+          imgUrl='https://links.papareact.com/gn7'
+          title='Yo! sushi'
+          rating={4.5}
+          genre="japanese"
+          address="123 Main 51"
+          short-description="This is a short description"
+          dishes={[]}
+          long={20}
+          lat={0}
+        />
+        <RestaurantCard 
+          id={124}
+          imgUrl='https://links.papareact.com/gn7'
+          title='Yo! sushi'
+          rating={4.5}
+          genre="japanese"
+          address="123 Main 51"
+          short-description="This is a short description"
+          dishes={[]}
+          long={20}
+          lat={0}
+        />
+        <RestaurantCard 
+          id={124}
+          imgUrl='https://links.papareact.com/gn7'
+          title='Yo! sushi'
+          rating={4.5}
+          genre="japanese"
+          address="123 Main 51"
+          short-description="This is a short description"
+          dishes={[]}
+          long={20}
+          lat={0}
+        />
+        <RestaurantCard 
+          id={124}
+          imgUrl='https://links.papareact.com/gn7'
+          title='Yo! sushi'
+          rating={4.5}
+          genre="japanese"
+          address="123 Main 51"
+          short-description="This is a short description"
+          dishes={[]}
+          long={20}
+          lat={0}
+        />
+
       </ScrollView>
     </View>
   )
