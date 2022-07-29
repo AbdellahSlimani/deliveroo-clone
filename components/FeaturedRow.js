@@ -1,17 +1,40 @@
 import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowRightIcon } from 'react-native-heroicons/outline'
 import RestaurantCard from './RestaurantCard'
+import sanityClient from '../sanity'
 
-const FeaturedRow = (props) => {
+const FeaturedRow = ({ id, title, description}) => {
+  const [restaurants, setRestaurants] = useState([])
+
+  useEffect(() => {
+    sanityClient.fetch(`
+      *[_type == "featured" &&_id == $id] {
+        ...,
+        restaurants[] -> {
+          ...,
+          dishes[]->,
+          type-> {
+            name
+          }
+        },
+      }[0]
+    `, 
+    { id }
+    ).then(data => {
+      setRestaurants(data?.restaurants)
+    })
+  }, [])
+
+
   return (
     <View>
       <View className='mt-4 flex-row items-center justify-between px-4'>
-        <Text className="text-lg font-bold">{props.title}</Text>
+        <Text className="text-lg font-bold">{title}</Text>
         <ArrowRightIcon color="#00ccbb"/>
       </View>
 
-      <Text className='text-xs text-gray-500 px-4'>{props.description}</Text>
+      <Text className='text-xs text-gray-500 px-4'>{description}</Text>
       <ScrollView 
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -20,79 +43,22 @@ const FeaturedRow = (props) => {
         }}
         className='pt-4'
       >
-        {/* RestaurantCards */}
-        <RestaurantCard 
-          id={124}
-          imgUrl='https://links.papareact.com/gn7'
-          title='Yo! sushi'
-          rating={4.5}
-          genre="japanese"
-          address="123 Main 51"
-          short-description="This is a short description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
-        <RestaurantCard 
-          id={124}
-          imgUrl='https://links.papareact.com/gn7'
-          title='Yo! sushi'
-          rating={4.5}
-          genre="japanese"
-          address="123 Main 51"
-          short-description="This is a short description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
-        <RestaurantCard 
-          id={124}
-          imgUrl='https://links.papareact.com/gn7'
-          title='Yo! sushi'
-          rating={4.5}
-          genre="japanese"
-          address="123 Main 51"
-          short-description="This is a short description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
-        <RestaurantCard 
-          id={124}
-          imgUrl='https://links.papareact.com/gn7'
-          title='Yo! sushi'
-          rating={4.5}
-          genre="japanese"
-          address="123 Main 51"
-          short-description="This is a short description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
-        <RestaurantCard 
-          id={124}
-          imgUrl='https://links.papareact.com/gn7'
-          title='Yo! sushi'
-          rating={4.5}
-          genre="japanese"
-          address="123 Main 51"
-          short-description="This is a short description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
-        <RestaurantCard 
-          id={124}
-          imgUrl='https://links.papareact.com/gn7'
-          title='Yo! sushi'
-          rating={4.5}
-          genre="japanese"
-          address="123 Main 51"
-          short-description="This is a short description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
+
+        {restaurants?.map((restaurant) => {
+          <RestaurantCard 
+            key={restaurant._id}
+            id={restaurant._id}
+            imgUrl={restaurant.image}
+            title={restaurant.name}
+            rating={restaurant.rating}
+            genre={restaurant.type?.name}
+            address={restaurant.address}
+            short-description={restaurant.short_description}
+            dishes={restaurant.dishes}
+            long={restaurant.long}
+            lat={restaurant.lat}
+          />
+        })}
 
       </ScrollView>
     </View>
