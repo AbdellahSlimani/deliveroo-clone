@@ -1,11 +1,12 @@
 import { View, Text, TouchableOpacity, Image} from 'react-native'
 import React from 'react'
+import { urlFor } from '../sanity'
 
 const CategoryCard = (props) => {
   return (
     <TouchableOpacity className='relative mr-2'>
       <Image source={{
-        uri: props.imgUrl
+        uri: urlFor(props.imgUrl).width(200).url()
       }}
         className='h-20 w-20'
       />
