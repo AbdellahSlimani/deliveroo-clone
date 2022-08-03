@@ -1,4 +1,5 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
@@ -93,7 +94,7 @@ const BasketScreen = () => {
               <Currency quantity={basketTotal + 5.99} currency="GBP"/>
             </Text>
           </View>
-          <TouchableOpacity className="rounder-lg bg-[#00ccbb] p-4">
+          <TouchableOpacity onPress={() => navigation.navigate("PreparingOrderScreen")} className="rounder-lg bg-[#00ccbb] p-4">
             <Text className="text-center text-white text-lg font-bold">Place Order</Text>
           </TouchableOpacity>
         </View>
